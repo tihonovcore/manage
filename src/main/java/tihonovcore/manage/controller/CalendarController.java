@@ -1,26 +1,35 @@
 package tihonovcore.manage.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.ModelAndView;
+import tihonovcore.manage.dao.CalendarDao;
+import tihonovcore.manage.model.Day;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CalendarController {
-    @GetMapping("/calendar")
-    public String index(Model model, @ModelAttribute("date") String date) {
-        model.addAttribute("date", date);
-        return "calendar";
+    private final CalendarDao dao;
+
+    public CalendarController(CalendarDao dao) {
+        this.dao = dao;
     }
 
-    @GetMapping("/choose_date")
-    public ModelAndView chooseDate(HttpServletRequest request, ModelMap model) {
-        String value = request.getParameter("date");
-        model.addAttribute("date", value);
-        return new ModelAndView("redirect:/calendar", model);
+    @GetMapping("/calendar")
+    public String index(ModelMap model, HttpServletRequest request) {
+        String date = request.getParameter("date");
+        if (date == null) {
+            //TODO: use current date
+            date = "2020-01-29";
+        }
+
+        model.addAttribute("date", date);
+
+        List<Day> days = dao.getDaysFrom(date);
+        model.addAttribute("days", days);
+
+        return "calendar";
     }
 }

@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 
-<!--/*@thymesVar id="date" type="java.lang.String"*/-->
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Calendar</title>
 </head>
 <body>
-<form method="get" action="/choose_date">
+<form method="get" action="/calendar">
     <label>
         From:
-        <input type="date" name="date" value="2020-01-31">
+        <!--/*@thymesVar id="date" type="java.lang.String"*/-->
+        <input type="date" name="date" th:value="${date}">
     </label>
     <input type="submit">
-
-    <p th:text="${date}"></p>
 </form>
+
+<table>
+    <!--/*@thymesVar id="days" type="java.util.List<Day>"*/-->
+    <!--/*@thymesVar id="day" type="tihonovcore.manage.model.Day"*/-->
+    <th:block th:each="day : ${days}">
+        <tr>
+            <td th:text="${day.deadline}"></td>
+            <td th:text="${day.date}"></td>
+            <td th:text="${day.plan}"></td>
+        </tr>
+    </th:block>
+</table>
+
 </body>
 </html>

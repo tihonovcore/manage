@@ -7,6 +7,7 @@ import tihonovcore.manage.dao.CalendarDao;
 import tihonovcore.manage.model.Day;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -19,10 +20,12 @@ public class CalendarController {
 
     @GetMapping("/calendar")
     public String index(ModelMap model, HttpServletRequest request) {
-        String date = request.getParameter("date");
-        if (date == null) {
-            //TODO: use current date
-            date = "2020-01-29";
+        String dateParameter = request.getParameter("date");
+        Date date;
+        if (dateParameter != null) {
+            date = Date.valueOf(dateParameter);
+        } else {
+            date = new Date(System.currentTimeMillis());
         }
 
         model.addAttribute("date", date);

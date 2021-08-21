@@ -1,11 +1,13 @@
 package tihonovcore.manage.model;
 
+import java.sql.Date;
+
 public class Day {
     private String deadline;
-    private String date;
+    private Date date;
     private String plan;
 
-    public Day(String deadline, String date, String plan) {
+    public Day(String deadline, Date date, String plan) {
         this.deadline = deadline;
         this.date = date;
         this.plan = plan;
@@ -15,7 +17,7 @@ public class Day {
         return deadline;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 

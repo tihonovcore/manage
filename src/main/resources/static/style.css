@@ -1,0 +1,17 @@
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background-color: #B86EB2;
+}
+
+.date_cell {
+    background-color: #C9B2D9;
+}
+
+th, td {
+    padding: 5px 10px;
+    border: black solid 1px;
+}

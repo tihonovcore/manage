@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendar</title>
+
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 <form method="get" action="/calendar">
     <label>
@@ -18,10 +21,16 @@
 <table>
     <!--/*@thymesVar id="days" type="java.util.List<Day>"*/-->
     <!--/*@thymesVar id="day" type="tihonovcore.manage.model.Day"*/-->
+    <tr>
+        <th>Deadline</th>
+        <th>Date</th>
+        <th>Plans</th>
+    </tr>
+
     <th:block th:each="day : ${days}">
         <tr>
             <td th:text="${day.deadline}"></td>
-            <td th:text="${day.date}"></td>
+            <td th:text="${day.date}" class="date_cell"></td>
             <td th:text="${day.plan}"></td>
         </tr>
     </th:block>

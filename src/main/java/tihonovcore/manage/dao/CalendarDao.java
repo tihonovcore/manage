@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CalendarDao {
     List<Day> getDaysFrom(Date from);
+
+    List<Day> getNDaysFrom(int n, Date from);
 }

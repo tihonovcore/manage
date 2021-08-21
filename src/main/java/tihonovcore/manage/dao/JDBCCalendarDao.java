@@ -10,4 +10,9 @@ public class JDBCCalendarDao implements CalendarDao {
     public List<Day> getDaysFrom(Date from) {
         throw new IllegalStateException("Not yet implemented");
     }
+
+    @Override
+    public List<Day> getNDaysFrom(int n, Date from) {
+        throw new IllegalStateException("Not yet implemented");
+    }
 }

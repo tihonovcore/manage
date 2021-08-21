@@ -2,7 +2,7 @@ package tihonovcore.manage.model;
 
 import java.sql.Date;
 
-public class Day {
+public class Day implements Comparable<Day> {
     private String deadline;
     private Date date;
     private String plan;
@@ -11,6 +11,10 @@ public class Day {
         this.deadline = deadline;
         this.date = date;
         this.plan = plan;
+    }
+
+    public Day(Date date) {
+        this("", date, "");
     }
 
     public String getDeadline() {
@@ -23,5 +27,10 @@ public class Day {
 
     public String getPlan() {
         return plan;
+    }
+
+    @Override
+    public int compareTo(Day o) {
+        return this.date.compareTo(o.date);
     }
 }

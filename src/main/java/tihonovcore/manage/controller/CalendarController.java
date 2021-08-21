@@ -12,6 +12,7 @@ import java.util.List;
 
 @Controller
 public class CalendarController {
+    private static final int SHOW_N_DAYS = 10;
     private final CalendarDao dao;
 
     public CalendarController(CalendarDao dao) {
@@ -30,7 +31,7 @@ public class CalendarController {
 
         model.addAttribute("date", date);
 
-        List<Day> days = dao.getDaysFrom(date);
+        List<Day> days = dao.getNDaysFrom(SHOW_N_DAYS, date);
         model.addAttribute("days", days);
 
         return "calendar";

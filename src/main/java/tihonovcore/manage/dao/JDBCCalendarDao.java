@@ -15,4 +15,14 @@ public class JDBCCalendarDao implements CalendarDao {
     public List<Day> getNDaysFrom(int n, Date from) {
         throw new IllegalStateException("Not yet implemented");
     }
+
+    @Override
+    public void updateDeadline(String newDeadline, Date date) {
+        throw new IllegalStateException("Not yet implemented");
+    }
+
+    @Override
+    public void updatePlan(String newPlan, Date date) {
+        throw new IllegalStateException("Not yet implemented");
+    }
 }

@@ -3,8 +3,10 @@ package tihonovcore.manage.model;
 import java.sql.Date;
 
 public class Day implements Comparable<Day> {
+    public static final String EMPTY_VALUE = "";
+
     private String deadline;
-    private Date date;
+    private final Date date;
     private String plan;
 
     public Day(String deadline, Date date, String plan) {
@@ -21,12 +23,20 @@ public class Day implements Comparable<Day> {
         return deadline;
     }
 
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
     public Date getDate() {
         return date;
     }
 
     public String getPlan() {
         return plan;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
     }
 
     @Override

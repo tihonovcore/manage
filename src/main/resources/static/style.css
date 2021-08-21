@@ -1,3 +1,7 @@
+#hidden_form_on_edit_data_cell {
+    display: none;
+}
+
 table {
     border-collapse: collapse;
     margin-top: 10px;
@@ -12,6 +16,22 @@ th {
 }
 
 th, td {
-    padding: 5px 10px;
     border: black solid 1px;
+}
+
+.date_cell {
+    padding: 5px 10px;
+}
+
+.input_cell {
+    border: none;
+    overflow: visible;
+}
+
+.input_cell:onclick {
+    border: none;
+}
+
+.input_cell:focus {
+    background-color: lightsteelblue;
 }

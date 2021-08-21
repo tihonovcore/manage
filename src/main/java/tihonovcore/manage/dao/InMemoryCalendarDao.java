@@ -5,6 +5,7 @@ import tihonovcore.manage.model.Day;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,32 @@ public class InMemoryCalendarDao implements CalendarDao {
         List<Day> result = getDaysFrom(from);
 
         for (int i = 0; i < n; i++) {
-            long nextDay = from.getTime() + TimeUnit.DAYS.toMillis(i);
-            if (result.stream().noneMatch(day -> day.getDate().getTime() == nextDay)) {
-                result.add(new Day(new Date(nextDay)));
+            Date nextDay = new Date(from.getTime() + TimeUnit.DAYS.toMillis(i));
+            if (result.stream().noneMatch(day -> day.getDate().toString().equals(nextDay.toString()))) {
+                result.add(new Day(nextDay));
             }
         }
 
         return result.stream().sorted().collect(Collectors.toList()).subList(0, n);
+    }
+
+    @Override
+    public void updateDeadline(String newDeadline, Date date) {
+        Optional<Day> optionalDay = days.stream().filter(day -> day.getDate().equals(date)).findAny();
+        if (optionalDay.isPresent()) {
+            optionalDay.get().setDeadline(newDeadline);
+        } else {
+            days.add(new Day(newDeadline, date, Day.EMPTY_VALUE));
+        }
+    }
+
+    @Override
+    public void updatePlan(String newPlan, Date date) {
+        Optional<Day> optionalDay = days.stream().filter(day -> day.getDate().equals(date)).findAny();
+        if (optionalDay.isPresent()) {
+            optionalDay.get().setPlan(newPlan);
+        } else {
+            days.add(new Day(Day.EMPTY_VALUE, date, newPlan));
+        }
     }
 }

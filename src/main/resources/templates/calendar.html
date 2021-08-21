@@ -9,13 +9,21 @@
 </head>
 
 <body>
+<!--/*@thymesVar id="date" type="java.lang.String"*/-->
+
 <form method="get" action="/calendar">
     <label>
         From:
-        <!--/*@thymesVar id="date" type="java.lang.String"*/-->
         <input type="date" name="date" th:value="${date}">
     </label>
     <input type="submit">
+</form>
+
+<form id="hidden_form_on_edit_data_cell" method="post" action="/edit_calendar">
+    <input id="on_edit_data_cell___selected_date" type="text" th:value="${date}" name="selected_date">
+    <input id="on_edit_data_cell___date" type="text" name="date">
+    <textarea id="on_edit_data_cell___new_value" name="new_value"></textarea>
+    <input id="on_edit_data_cell___is_deadline_edited" type="text" name="is_deadline_edited">
 </form>
 
 <table>
@@ -29,12 +37,13 @@
 
     <th:block th:each="day : ${days}">
         <tr>
-            <td th:text="${day.deadline}"></td>
-            <td th:text="${day.date}" class="date_cell"></td>
-            <td th:text="${day.plan}"></td>
+            <td><textarea class="input_cell" th:text="${day.getDeadline()}"></textarea></td>
+            <td th:text="${day.getDate()}" class="date_cell"></td>
+            <td><textarea class="input_cell" th:text="${day.getPlan()}"></textarea></td>
         </tr>
     </th:block>
 </table>
 
+<script src="/script.js"></script>
 </body>
 </html>

@@ -9,6 +9,10 @@ import java.util.List;
 public class JDBCCalendarDao extends CalendarDao {
     private final String DATABASE_URL = "jdbc:sqlite:manage.sqlite";
 
+    private final String DEADLINE = "deadline";
+    private final String DATE = "yyyy_mm_dd_date";
+    private final String PLAN = "plan";
+
     @Override
     public List<Day> getRecordsFrom(Date from) {
         List<Day> queryResult = new ArrayList<>();
@@ -19,9 +23,9 @@ public class JDBCCalendarDao extends CalendarDao {
 
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                String deadline = result.getString("deadline");
-                Date date = Date.valueOf(result.getString("yyyy_mm_dd_date"));
-                String plan = result.getString("plan");
+                String deadline = result.getString(DEADLINE);
+                Date date = Date.valueOf(result.getString(DATE));
+                String plan = result.getString(PLAN);
 
                 Day day = new Day(deadline, date, plan);
                 queryResult.add(day);
